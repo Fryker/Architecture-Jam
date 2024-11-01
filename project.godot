@@ -26,7 +26,6 @@ EmbedGameAutoload="*res://addons/fabimakesgames.embed_game/embed_game_autoload.g
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/always_on_top=true
 window/size/window_width_override=800
 window/size/window_height_override=600
 window/stretch/mode="canvas_items"
