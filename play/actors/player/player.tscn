@@ -1,0 +1,319 @@
+[gd_scene load_steps=26 format=3 uid="uid://6p2q60xi0qrs"]
+
+[ext_resource type="Script" path="res://play/actors/player/player.gd" id="1_qraih"]
+[ext_resource type="PackedScene" uid="uid://btnqjgbdywv7y" path="res://play/props/weapons/staff/staff.tscn" id="2_24g3o"]
+[ext_resource type="Texture2D" uid="uid://doifcsnhgnokw" path="res://play/actors/player/tile_0084.png" id="2_p4e0w"]
+[ext_resource type="PackedScene" uid="uid://cvd5oclhm0tm7" path="res://play/resources/components/hurt_box_component/hurt_box_component.tscn" id="3_f61r1"]
+[ext_resource type="Script" path="res://play/resources/state_machine/state_machine.gd" id="3_w33m0"]
+[ext_resource type="Script" path="res://play/actors/player/states/move_state.gd" id="4_d0jhu"]
+[ext_resource type="Script" path="res://play/actors/player/states/idle_state.gd" id="4_pmas5"]
+[ext_resource type="PackedScene" uid="uid://wagjkpckrvmf" path="res://play/resources/components/velocity_component/velocity_component.tscn" id="6_bmi7r"]
+[ext_resource type="PackedScene" uid="uid://dlrfdle8sk8ec" path="res://play/resources/components/healt_component/healt_component.tscn" id="7_8j68p"]
+[ext_resource type="Script" path="res://play/actors/player/states/hurt.gd" id="8_murqx"]
+[ext_resource type="Script" path="res://play/actors/player/states/dead.gd" id="10_2dews"]
+[ext_resource type="Script" path="res://play/resources/state_machine/action_state_machine.gd" id="12_ojxkf"]
+[ext_resource type="Script" path="res://play/actors/player/states/none.gd" id="13_y43yv"]
+[ext_resource type="Script" path="res://play/actors/player/states/attack.gd" id="14_mkuy6"]
+[ext_resource type="AudioStream" uid="uid://bu2xw4b1l73te" path="res://play/actors/player/61_Hit_03.wav" id="15_3qtvi"]
+[ext_resource type="AudioStream" uid="uid://d2fdnj4vgatx" path="res://play/actors/player/02_Heal_02.wav" id="15_rynhw"]
+[ext_resource type="AudioStream" uid="uid://di2tieywxmnnk" path="res://play/actors/player/03_Step_grass_03.wav" id="16_5o3fc"]
+[ext_resource type="AudioStream" uid="uid://cvl06hggfww3d" path="res://play/actors/player/51_Flee_02.wav" id="17_56k1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmlpv"]
+size = Vector2(10, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6iui"]
+size = Vector2(12, 13)
+
+[sub_resource type="Animation" id="Animation_nyxrh"]
+resource_name = "Dead"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHolder:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(7, 3), Vector2(18, 9)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHolder:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, 4.88692]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DeadAudio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s2y67"]
+resource_name = "Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.792157, 0.94902, 1), Color(1, 1, 1, 1), Color(0, 0.792157, 0.94902, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.298774,
+"start_offset": 0.0,
+"stream": ExtResource("15_3qtvi")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_42253"]
+resource_name = "Idle"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l2088"]
+resource_name = "Move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("16_5o3fc")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_csxy1"]
+_data = {
+"Dead": SubResource("Animation_nyxrh"),
+"Hurt": SubResource("Animation_s2y67"),
+"Idle": SubResource("Animation_42253"),
+"Move": SubResource("Animation_l2088")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "sprite", "weapon_holder", "audio_player", "health_component", "velocity_component")]
+collision_mask = 100
+motion_mode = 1
+script = ExtResource("1_qraih")
+anim = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+weapon_holder = NodePath("WeaponHolder")
+audio_player = NodePath("AudioStreamPlayer2D")
+health_component = NodePath("StateMachine/Hurt/HealthComponent")
+velocity_component = NodePath("StateMachine/Move/VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_kmlpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4.76837e-07, -3.57628e-07)
+texture = ExtResource("2_p4e0w")
+metadata/_edit_lock_ = true
+
+[node name="WeaponHolder" type="Marker2D" parent="."]
+position = Vector2(7, 3)
+rotation = 1.5708
+
+[node name="Staff" parent="WeaponHolder" instance=ExtResource("2_24g3o")]
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_f61r1")]
+collision_mask = 6
+health_component = NodePath("../StateMachine/Hurt/HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_e6iui")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_w33m0")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_pmas5")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("4_d0jhu")
+
+[node name="VelocityComponent" parent="StateMachine/Move" instance=ExtResource("6_bmi7r")]
+max_speed = 150.0
+min_speed = 100.0
+speed = 85.0
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("8_murqx")
+
+[node name="HealthComponent" parent="StateMachine/Hurt" instance=ExtResource("7_8j68p")]
+max_health = 3
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("10_2dews")
+
+[node name="ActionStateMachine" type="Node" parent="." node_paths=PackedStringArray("main_state_machine", "initial_state")]
+script = ExtResource("12_ojxkf")
+main_state_machine = NodePath("../StateMachine")
+initial_state = NodePath("None")
+
+[node name="None" type="Node" parent="ActionStateMachine"]
+script = ExtResource("13_y43yv")
+
+[node name="Attack" type="Node" parent="ActionStateMachine"]
+script = ExtResource("14_mkuy6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_polyphony = 5
+
+[node name="LevelUpAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_rynhw")
+
+[node name="DeadAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_56k1b")
+volume_db = 10.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_csxy1")
+}
+autoplay = "Idle"
+
+[connection signal="health_down" from="StateMachine/Hurt/HealthComponent" to="StateMachine/Hurt" method="player_health_down"]

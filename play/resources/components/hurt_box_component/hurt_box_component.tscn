@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvd5oclhm0tm7"]
+
+[ext_resource type="Script" path="res://play/resources/components/hurt_box_component/hurt_box_component.gd" id="1_qblg8"]
+
+[node name="HurtBox" type="Area2D"]
+input_pickable = false
+monitoring = false
+script = ExtResource("1_qblg8")

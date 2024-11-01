@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=3 uid="uid://tx23hf67mat3"]
+
+[ext_resource type="Script" path="res://play/ui/game_over_screen/game_over_screen.gd" id="1_lhp1x"]
+[ext_resource type="PackedScene" uid="uid://dvi5nwg3c0pt2" path="res://play/ui/change_scene_button/change_scene_button.tscn" id="2_4q62b"]
+[ext_resource type="AudioStream" uid="uid://b5qoqaq72vcn8" path="res://play/ui/game_over_screen/Dark Ambient 3.wav" id="2_holeb"]
+[ext_resource type="PackedScene" uid="uid://cbwpmp8tpu07m" path="res://play/ui/quit_button/quit_button.tscn" id="3_p5bvd"]
+
+[sub_resource type="Animation" id="Animation_o54w6"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4mqhk"]
+resource_name = "Enter"
+length = 0.001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.27451)]
+}
+
+[sub_resource type="Animation" id="Animation_g284y"]
+resource_name = "Dissapear"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l7e6a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_31wwl"]
+_data = {
+"Appear": SubResource("Animation_o54w6"),
+"Dissapear": SubResource("Animation_g284y"),
+"Enter": SubResource("Animation_4mqhk"),
+"RESET": SubResource("Animation_l7e6a")
+}
+
+[node name="GameOverScreen" type="Control" node_paths=PackedStringArray("score_label", "anim", "background")]
+process_mode = 3
+modulate = Color(0, 0, 0, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lhp1x")
+score_label = NodePath("VBoxContainer/Label")
+anim = NodePath("AnimationPlayer")
+background = NodePath("ColorRect")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_holeb")
+volume_db = -10.0
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.5
+offset_top = -10.0
+offset_right = 13.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"GameOverLabel"
+text = "Total Time Survived: %s"
+
+[node name="ChangeSceneButton" parent="VBoxContainer" instance=ExtResource("2_4q62b")]
+layout_mode = 2
+theme_type_variation = &"GameOverButton"
+text = "Replay"
+change_both = false
+scene_path_2d = "res://play/stages/town/town_stage.tscn"
+scene_path_gui = "res://play/ui/player_ui/player_ui.tscn"
+delete = true
+transition = true
+seconds = 1.5
+
+[node name="QuitButton" parent="VBoxContainer" instance=ExtResource("3_p5bvd")]
+layout_mode = 2
+theme_type_variation = &"GameOverButton"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_31wwl")
+}
+
+[connection signal="pressed" from="VBoxContainer/ChangeSceneButton" to="." method="_on_change_scene_button_pressed"]

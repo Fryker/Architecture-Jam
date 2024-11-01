@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddx3uj30lef5e"]
+
+[ext_resource type="Script" path="res://play/control_booth/game_controller/game_controller.gd" id="1_skb7v"]
+[ext_resource type="PackedScene" uid="uid://dvw8ph5pkbxbs" path="res://test/test_characters.tscn" id="2_eu2oa"]
+
+[node name="GameController" type="Node" node_paths=PackedStringArray("world_2d")]
+script = ExtResource("1_skb7v")
+world_2d = NodePath("TestCharacters")
+
+[node name="TestCharacters" parent="." instance=ExtResource("2_eu2oa")]

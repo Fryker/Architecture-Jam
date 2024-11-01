@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=3 uid="uid://d1vhr7s45mfc6"]
+
+[ext_resource type="Script" path="res://play/ui/main_menu/main_menu.gd" id="1_j2oak"]
+[ext_resource type="PackedScene" uid="uid://cbwpmp8tpu07m" path="res://play/ui/quit_button/quit_button.tscn" id="1_saayb"]
+[ext_resource type="AudioStream" uid="uid://dn615ebno017w" path="res://play/ui/main_menu/Ambient 5.wav" id="2_ipeio"]
+[ext_resource type="Texture2D" uid="uid://lgyvlyswgs55" path="res://play/ui/main_menu/parallax_background/far_mountains_fc.png" id="2_xo8vk"]
+[ext_resource type="Texture2D" uid="uid://d35l06cf54ggm" path="res://play/ui/main_menu/parallax_background/sky_fc.png" id="3_js3jc"]
+[ext_resource type="Texture2D" uid="uid://1lhh4n14sio4" path="res://play/ui/main_menu/parallax_background/grassy_mountains_fc.png" id="3_lm6hj"]
+[ext_resource type="Texture2D" uid="uid://b88oxkgyg0j53" path="res://play/ui/main_menu/parallax_background/clouds_mid_fc.png" id="4_t2jb8"]
+[ext_resource type="Texture2D" uid="uid://dxbpndaktu2jk" path="res://play/ui/main_menu/parallax_background/clouds_mid_t_fc.png" id="5_t62fg"]
+[ext_resource type="Texture2D" uid="uid://oaqbhqva1l7c" path="res://play/ui/main_menu/parallax_background/hill.png" id="6_e3lnx"]
+[ext_resource type="Texture2D" uid="uid://ctdcm8a8d2oth" path="res://play/ui/main_menu/parallax_background/clouds_front_t_fc.png" id="7_bhn0e"]
+[ext_resource type="PackedScene" uid="uid://dvi5nwg3c0pt2" path="res://play/ui/change_scene_button/change_scene_button.tscn" id="7_li1y4"]
+[ext_resource type="Texture2D" uid="uid://bt4nblwnq4arn" path="res://play/ui/main_menu/parallax_background/clouds_front_fc.png" id="8_ou5ar"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j2oak")
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ipeio")
+volume_db = -10.0
+autoplay = true
+
+[node name="ParallaxPart0" type="Node2D" parent="."]
+
+[node name="Sky" type="Parallax2D" parent="ParallaxPart0"]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(640, 0)
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxPart0/Sky"]
+scale = Vector2(1.66667, 1.66667)
+texture = ExtResource("3_js3jc")
+centered = false
+
+[node name="FarMountains" type="Parallax2D" parent="ParallaxPart0"]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-30, 0)
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxPart0/FarMountains"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("2_xo8vk")
+centered = false
+
+[node name="ParallaxTitle" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1000, 0)
+autoscroll = Vector2(-45, 0)
+
+[node name="CenterContainer2" type="CenterContainer" parent="ParallaxTitle"]
+offset_left = 176.0
+offset_top = 48.0
+offset_right = 464.0
+offset_bottom = 130.0
+grow_horizontal = 2
+
+[node name="TitleLabel" type="Label" parent="ParallaxTitle/CenterContainer2"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Mage Survivor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PaarallaxPart1" type="Node2D" parent="."]
+
+[node name="Mountains" type="Parallax2D" parent="PaarallaxPart1"]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(400, 0)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-60, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="PaarallaxPart1/Mountains"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("3_lm6hj")
+centered = false
+
+[node name="MidCludsT" type="Parallax2D" parent="PaarallaxPart1"]
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(70, 0)
+
+[node name="Sprite2D5" type="Sprite2D" parent="PaarallaxPart1/MidCludsT"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("5_t62fg")
+centered = false
+
+[node name="MidClouds" type="Parallax2D" parent="PaarallaxPart1"]
+scroll_scale = Vector2(1.2, 1.2)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(80, 0)
+
+[node name="Sprite2D6" type="Sprite2D" parent="PaarallaxPart1/MidClouds"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("4_t2jb8")
+centered = false
+
+[node name="Hill" type="Parallax2D" parent="PaarallaxPart1"]
+scroll_scale = Vector2(1.5, 1.5)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(10, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="PaarallaxPart1/Hill"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("6_e3lnx")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -236.0
+offset_right = 144.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_direction = 1
+layout_mode = 2
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="StartButton" parent="CenterContainer/VBoxContainer" instance=ExtResource("7_li1y4")]
+layout_mode = 2
+theme_type_variation = &"TitleButton"
+change_both = false
+scene_path_2d = "res://play/stages/town/town_stage.tscn"
+scene_path_gui = "res://play/ui/player_ui/player_ui.tscn"
+delete = true
+transition = true
+
+[node name="QuitButton" parent="CenterContainer/VBoxContainer" instance=ExtResource("1_saayb")]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"TitleButton"
+
+[node name="ParallaxPar2" type="Node2D" parent="."]
+
+[node name="FrontCludsT2" type="Parallax2D" parent="ParallaxPar2"]
+scroll_scale = Vector2(1.75, 1.75)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(85, 0)
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxPar2/FrontCludsT2"]
+position = Vector2(5.68434e-14, -14)
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("7_bhn0e")
+centered = false
+
+[node name="FrontCludsT" type="Parallax2D" parent="ParallaxPar2"]
+scroll_scale = Vector2(1.8, 1.8)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(90, 0)
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxPar2/FrontCludsT"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("7_bhn0e")
+centered = false
+
+[node name="FrontCluds" type="Parallax2D" parent="ParallaxPar2"]
+scroll_scale = Vector2(3, 3)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(100, 0)
+
+[node name="Sprite2D8" type="Sprite2D" parent="ParallaxPar2/FrontCluds"]
+scale = Vector2(1.667, 1.667)
+texture = ExtResource("8_ou5ar")
+centered = false

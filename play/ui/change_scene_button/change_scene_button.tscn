@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvi5nwg3c0pt2"]
+
+[ext_resource type="Script" path="res://play/ui/change_scene_button/change_scene_button.gd" id="1_rs6nu"]
+[ext_resource type="AudioStream" uid="uid://da737ca7i3k43" path="res://play/ui/change_scene_button/001_Hover_01.wav" id="2_bouec"]
+[ext_resource type="AudioStream" uid="uid://cubl0yjaw4r1y" path="res://play/ui/change_scene_button/013_Confirm_03.wav" id="3_cj3ji"]
+
+[node name="ChangeSceneButton" type="Button" node_paths=PackedStringArray("audio_stream")]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+action_mode = 0
+text = "Start"
+script = ExtResource("1_rs6nu")
+audio_stream = NodePath("AudioStreamPlayer")
+hover_sound = ExtResource("2_bouec")
+pressed_sound = ExtResource("3_cj3ji")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="." to="." method="hover_over_button"]
+[connection signal="pressed" from="." to="." method="change_on_pressed"]

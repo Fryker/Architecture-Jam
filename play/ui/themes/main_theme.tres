@@ -1,0 +1,139 @@
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://cedscaakocsk"]
+
+[ext_resource type="Texture2D" uid="uid://bao88bon07peh" path="res://play/ui/textures/tilemap_packed.png" id="1_5xhvx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0xno"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s6g56"]
+texture = SubResource("AtlasTexture_q0xno")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3o8q7"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8l8na"]
+texture = SubResource("AtlasTexture_3o8q7")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvbbd"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3skt"]
+texture = SubResource("AtlasTexture_rvbbd")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bpih"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ae0cc"]
+texture = SubResource("AtlasTexture_1bpih")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6l53"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(128, 162, 96, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k6haw"]
+texture = SubResource("AtlasTexture_y6l53")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmvig"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cbw7q"]
+texture = SubResource("AtlasTexture_bmvig")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1qdy"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jslxi"]
+texture = SubResource("AtlasTexture_x1qdy")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ui5j"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d52r7"]
+texture = SubResource("AtlasTexture_5ui5j")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usfjv"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iq6u3"]
+texture = SubResource("AtlasTexture_usfjv")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlbdy"]
+atlas = ExtResource("1_5xhvx")
+region = Rect2(129, 128, 94, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enbif"]
+texture = SubResource("AtlasTexture_tlbdy")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[resource]
+GameOverButton/base_type = &"Button"
+GameOverButton/colors/font_color = Color(1, 1, 1, 1)
+GameOverButton/colors/font_hover_color = Color(0.481789, 0.481789, 0.481789, 1)
+GameOverButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+GameOverButton/font_sizes/font_size = 40
+GameOverButton/styles/disabled = SubResource("StyleBoxTexture_s6g56")
+GameOverButton/styles/hover = SubResource("StyleBoxTexture_8l8na")
+GameOverButton/styles/normal = SubResource("StyleBoxTexture_i3skt")
+GameOverButton/styles/pressed = SubResource("StyleBoxTexture_ae0cc")
+GameOverLabel/base_type = &"Label"
+GameOverLabel/font_sizes/font_size = 55
+GameOverLabel/styles/normal = SubResource("StyleBoxTexture_k6haw")
+TitleButton/base_type = &"Button"
+TitleButton/colors/font_color = Color(0.456041, 0.265943, 0.132791, 1)
+TitleButton/colors/font_hover_color = Color(0.960124, 0.816985, 0.727066, 1)
+TitleButton/colors/font_pressed_color = Color(0.960784, 0.815686, 0.72549, 1)
+TitleButton/font_sizes/font_size = 40
+TitleButton/styles/disabled = SubResource("StyleBoxTexture_cbw7q")
+TitleButton/styles/hover = SubResource("StyleBoxTexture_jslxi")
+TitleButton/styles/normal = SubResource("StyleBoxTexture_d52r7")
+TitleButton/styles/pressed = SubResource("StyleBoxTexture_iq6u3")
+TitleLabel/base_type = &"Label"
+TitleLabel/font_sizes/font_size = 55
+TitleLabel/styles/normal = SubResource("StyleBoxTexture_enbif")

@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://byipn1a46hcvh"]
+
+[ext_resource type="Texture2D" uid="uid://dwdukmgiw87u7" path="res://play/props/projectiles/fireball/bullet1_strip.png" id="1_6f615"]
+[ext_resource type="Script" path="res://play/props/projectiles/fireball/fireball.gd" id="1_tppon"]
+[ext_resource type="PackedScene" uid="uid://crtue82sxdi1q" path="res://play/resources/components/hit_box_component/hit_box_component.tscn" id="2_alee2"]
+[ext_resource type="Script" path="res://play/resources/data/attack_data/attack_resource.gd" id="3_snq8l"]
+[ext_resource type="PackedScene" uid="uid://wagjkpckrvmf" path="res://play/resources/components/velocity_component/velocity_component.tscn" id="5_lbmn4"]
+[ext_resource type="AudioStream" uid="uid://duq455u1axspw" path="res://play/props/projectiles/fireball/04_Fire_explosion_04_medium.wav" id="6_71l04"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r4dk"]
+atlas = ExtResource("1_6f615")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fdyb"]
+atlas = ExtResource("1_6f615")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_43bql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r4dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fdyb")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_nf1uc"]
+resource_local_to_scene = true
+script = ExtResource("3_snq8l")
+attack_damage = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_twfwu"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62urb"]
+radius = 1.0
+
+[node name="Fireball" type="CharacterBody2D" node_paths=PackedStringArray("hit_box_component", "velocity_component", "sprite")]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_tppon")
+life_span = 5.0
+hit_box_component = NodePath("HitBoxComponent")
+velocity_component = NodePath("VelocityComponent")
+sprite = NodePath("Sprite2D")
+audio_stream = ExtResource("6_71l04")
+normal_damage = 3
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_43bql")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 1
+frame_progress = 0.336469
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("2_alee2")]
+collision_layer = 16
+collision_mask = 6
+data = SubResource("Resource_nf1uc")
+delete_on_contact = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_twfwu")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_lbmn4")]
+speed = 150.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_62urb")
+
+[connection signal="hit_box_contact" from="HitBoxComponent" to="." method="hit_box_contact"]

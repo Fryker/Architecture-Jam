@@ -1,0 +1,182 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwevui553k3q0"]
+
+[ext_resource type="Script" path="res://play/props/power_ups/damage_up/damage_up_power_up.gd" id="1_hkmxa"]
+[ext_resource type="Texture2D" uid="uid://d4njsv7q65u8t" path="res://play/props/power_ups/damage_up/tile_0127.png" id="2_710kf"]
+[ext_resource type="PackedScene" uid="uid://2l85qpttmm5p" path="res://play/resources/components/detect_area_component/detect_area_component.tscn" id="2_dk4sw"]
+[ext_resource type="AudioStream" uid="uid://c6185nolcxafb" path="res://play/props/power_ups/damage_up/30_Revive_03.wav" id="4_n74cs"]
+[ext_resource type="AudioStream" uid="uid://dxy6u51renquw" path="res://play/props/power_ups/damage_up/16_Atk_buff_04.wav" id="4_vb2vy"]
+[ext_resource type="AudioStream" uid="uid://lfg2f41you5c" path="res://play/props/power_ups/damage_up/02_Heal_02.wav" id="6_s1kt7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bk8gu"]
+radius = 14.0
+
+[sub_resource type="Animation" id="Animation_1a7ew"]
+resource_name = "Appear"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DetectAreaComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_vb2vy")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_itydh"]
+resource_name = "Idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_n74cs")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_53qtu"]
+resource_name = "Pick"
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_s1kt7")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DetectAreaComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0kbi2"]
+_data = {
+"Appear": SubResource("Animation_1a7ew"),
+"Idle": SubResource("Animation_itydh"),
+"Pick": SubResource("Animation_53qtu")
+}
+
+[node name="DamageUpPowerUp" type="Node2D" node_paths=PackedStringArray("detect_area", "despawn_timer", "anim") groups=["PowerUp"]]
+script = ExtResource("1_hkmxa")
+detect_area = NodePath("DetectAreaComponent")
+despawn_timer = NodePath("DespawnTimer")
+anim = NodePath("AnimationPlayer")
+power_up_type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.113983
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_710kf")
+
+[node name="DetectAreaComponent" parent="." instance=ExtResource("2_dk4sw")]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectAreaComponent"]
+shape = SubResource("CircleShape2D_bk8gu")
+disabled = true
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0kbi2")
+}
+autoplay = "Appear"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

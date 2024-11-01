@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfvc0emmg1p3s"]
+
+[ext_resource type="Script" path="res://play/resources/components/path_finding_component/path_finding_component.gd" id="1_ipak4"]
+
+[node name="PathFindingComponent" type="Node"]
+script = ExtResource("1_ipak4")

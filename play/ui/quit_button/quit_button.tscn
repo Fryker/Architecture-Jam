@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbwpmp8tpu07m"]
+
+[ext_resource type="Script" path="res://play/ui/quit_button/quit_button.gd" id="1_kvcn0"]
+[ext_resource type="AudioStream" uid="uid://devbgxspelb4f" path="res://play/ui/quit_button/001_Hover_01.wav" id="2_31l3t"]
+[ext_resource type="AudioStream" uid="uid://dqvj7rdpg20da" path="res://play/ui/quit_button/029_Decline_09.wav" id="3_k7fjk"]
+
+[node name="QuitButton" type="Button" node_paths=PackedStringArray("audio_stream")]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Quit"
+icon_alignment = 1
+script = ExtResource("1_kvcn0")
+audio_stream = NodePath("AudioStreamPlayer")
+hover_sound = ExtResource("2_31l3t")
+pressed_sound = ExtResource("3_k7fjk")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="." to="." method="hover_over_button"]
+[connection signal="pressed" from="." to="." method="quit_game"]

@@ -1,0 +1,132 @@
+[gd_scene load_steps=24 format=3 uid="uid://d165j7vduvrs0"]
+
+[ext_resource type="Script" path="res://play/actors/enemies/ghost/ghost.gd" id="1_qjmq5"]
+[ext_resource type="Resource" uid="uid://ctxing8jpajsm" path="res://play/actors/enemies/ghost/ghost_data.tres" id="2_7mrgm"]
+[ext_resource type="PackedScene" uid="uid://cvd5oclhm0tm7" path="res://play/resources/components/hurt_box_component/hurt_box_component.tscn" id="2_8570n"]
+[ext_resource type="Script" path="res://play/resources/state_machine/state_machine.gd" id="3_5rmm2"]
+[ext_resource type="PackedScene" uid="uid://2l85qpttmm5p" path="res://play/resources/components/detect_area_component/detect_area_component.tscn" id="3_kkx8a"]
+[ext_resource type="PackedScene" uid="uid://crtue82sxdi1q" path="res://play/resources/components/hit_box_component/hit_box_component.tscn" id="3_pa58k"]
+[ext_resource type="Script" path="res://play/resources/data/enemy_data/enemy_data.gd" id="3_vojbx"]
+[ext_resource type="Resource" uid="uid://dstawtytxnu4h" path="res://play/actors/enemies/bat/bat_data.tres" id="4_53lxc"]
+[ext_resource type="Script" path="res://play/resources/data/attack_data/attack_resource.gd" id="4_co1bm"]
+[ext_resource type="Script" path="res://play/actors/enemies/ghost/states/move.gd" id="4_qjk7a"]
+[ext_resource type="PackedScene" uid="uid://dfvc0emmg1p3s" path="res://play/resources/components/path_finding_component/path_finding_component.tscn" id="7_qb30x"]
+[ext_resource type="Script" path="res://play/actors/enemies/ghost/states/hurt.gd" id="7_thb6q"]
+[ext_resource type="PackedScene" uid="uid://wagjkpckrvmf" path="res://play/resources/components/velocity_component/velocity_component.tscn" id="8_a6nng"]
+[ext_resource type="PackedScene" uid="uid://dlrfdle8sk8ec" path="res://play/resources/components/healt_component/healt_component.tscn" id="8_hdysa"]
+[ext_resource type="Script" path="res://play/actors/enemies/ghost/states/dead.gd" id="9_iqbgf"]
+[ext_resource type="Script" path="res://play/actors/enemies/ghost/states/attack.gd" id="11_8m1qi"]
+[ext_resource type="PackedScene" uid="uid://bsk81rsln3fxp" path="res://play/resources/components/path_finding_component/navigation_component.tscn" id="12_8pc8m"]
+[ext_resource type="AnimationLibrary" uid="uid://bwkoxf5rutfpy" path="res://play/actors/enemies/ghost/ghost_animations.res" id="17_bu8or"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2oj4"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7rghk"]
+radius = 13.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5jp6"]
+size = Vector2(16, 15)
+
+[sub_resource type="Resource" id="Resource_sjnj4"]
+resource_local_to_scene = true
+script = ExtResource("4_co1bm")
+attack_damage = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_surod"]
+radius = 18.0
+
+[node name="Ghost" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "velocity_component", "hit_box_component", "path_finding_component", "navigation_component", "detect_area_component", "anim", "sprite")]
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_qjmq5")
+health_component = NodePath("StateMachine/Hurt/HealthComponent")
+velocity_component = NodePath("StateMachine/Move/VelocityComponent")
+hit_box_component = NodePath("HitBoxComponent")
+path_finding_component = NodePath("StateMachine/Move/PathFindingComponent")
+navigation_component = NodePath("NavigationComponent")
+detect_area_component = NodePath("DetectAreaComponent")
+anim = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+enemy_data = ExtResource("2_7mrgm")
+enemy_data_types = Array[ExtResource("3_vojbx")]([ExtResource("2_7mrgm"), ExtResource("4_53lxc")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_j2oj4")
+disabled = true
+
+[node name="DetectAreaComponent" parent="." instance=ExtResource("3_kkx8a")]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectAreaComponent"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7rghk")
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_8570n")]
+collision_layer = 2
+collision_mask = 25
+health_component = NodePath("../StateMachine/Hurt/HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_v5jp6")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_pa58k")]
+collision_layer = 2
+monitoring = false
+data = SubResource("Resource_sjnj4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_surod")
+disabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_5rmm2")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("4_qjk7a")
+
+[node name="PathFindingComponent" parent="StateMachine/Move" node_paths=PackedStringArray("velocity_component", "navigation_component") instance=ExtResource("7_qb30x")]
+velocity_component = NodePath("../VelocityComponent")
+navigation_component = NodePath("../../../NavigationComponent")
+continuous_following_target = true
+
+[node name="VelocityComponent" parent="StateMachine/Move" instance=ExtResource("8_a6nng")]
+max_speed = 100.0
+min_speed = 100.0
+speed = 70.0
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("11_8m1qi")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("7_thb6q")
+
+[node name="HealthComponent" parent="StateMachine/Hurt" instance=ExtResource("8_hdysa")]
+max_health = 10
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("9_iqbgf")
+
+[node name="NavigationComponent" parent="." node_paths=PackedStringArray("navigation_entitie") instance=ExtResource("12_8pc8m")]
+navigation_layers = 4
+avoidance_enabled = true
+radius = 20.0
+avoidance_layers = 2
+avoidance_mask = 14
+navigation_entitie = NodePath("..")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("17_bu8or")
+}

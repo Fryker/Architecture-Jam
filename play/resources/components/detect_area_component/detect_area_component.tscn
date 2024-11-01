@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://2l85qpttmm5p"]
+
+[ext_resource type="Script" path="res://play/resources/components/detect_area_component/detect_area_component.gd" id="1_30sie"]
+
+[node name="DetectAreaComponent" type="Area2D"]
+input_pickable = false
+monitorable = false
+script = ExtResource("1_30sie")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

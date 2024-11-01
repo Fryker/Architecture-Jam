@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3 uid="uid://bc8jmn6qe51kv"]
+
+[ext_resource type="Script" path="res://play/resources/data/attack_data/attack_resource.gd" id="1_k3oo0"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_k3oo0")
+attack_damage = 0

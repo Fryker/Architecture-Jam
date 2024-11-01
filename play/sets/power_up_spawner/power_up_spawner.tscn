@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://di85ds5omcu02"]
+
+[ext_resource type="Script" path="res://play/sets/power_up_spawner/power_up_spawner.gd" id="1_brsip"]
+[ext_resource type="PackedScene" uid="uid://1718nrutgxye" path="res://play/props/power_ups/health_up/healt_up_power_up.tscn" id="2_e7xwc"]
+[ext_resource type="PackedScene" uid="uid://dwevui553k3q0" path="res://play/props/power_ups/damage_up/damage_up_power_up.tscn" id="3_o7tmt"]
+
+[node name="PowerUpSpawner" type="Node2D" node_paths=PackedStringArray("spawn_timer") groups=["Spawner"]]
+script = ExtResource("1_brsip")
+actor_scenes = Array[PackedScene]([ExtResource("2_e7xwc"), ExtResource("3_o7tmt")])
+spawn_timer = NodePath("SpawnTimer")
+distance = 150.0
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="spawn_timer_finished"]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://c2v2jei5ec162"]
+
+[ext_resource type="Script" path="res://play/resources/data/enemy_data/enemy_data.gd" id="1_bo10v"]
+[ext_resource type="AnimationLibrary" uid="uid://bqlpssqsmjgds" path="res://play/actors/enemies/basic_enemy/basic_enemy_animations.res" id="1_qybg7"]
+[ext_resource type="Texture2D" uid="uid://ddvp5hg27dy2i" path="res://icon.svg" id="3_g0mhn"]
+
+[resource]
+script = ExtResource("1_bo10v")
+sprite = ExtResource("3_g0mhn")
+max_health = 10
+health = 10
+attack = 1
+max_speed = 50
+min_speed = 50
+speed = 50
+exp_points = 1
+animations = ExtResource("1_qybg7")

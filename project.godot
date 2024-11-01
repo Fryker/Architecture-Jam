@@ -1,0 +1,130 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Architecture GameJam"
+config/tags=PackedStringArray("game__jam_game")
+run/main_scene="res://play/control_booth/game_controller/game_controller.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://play/actors/player/tile_0084.png"
+
+[autoload]
+
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
+Booth="*res://play/control_booth/booth/booth.gd"
+EmbedGameAutoload="*res://addons/fabimakesgames.embed_game/embed_game_autoload.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/always_on_top=true
+window/size/window_width_override=800
+window/size/window_height_override=600
+window/stretch/mode="canvas_items"
+
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="C:/Users/Fryker/Documents/GameDev/Game Projects/GameJam Projects/architecture-gamejam/movie_files/movie_test.avi"
+movie_writer/fps=30
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/YouCanDoIt/plugin.cfg", "res://addons/fabimakesgames.embed_game/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://play/": "purple",
+"res://play/actors/": "pink",
+"res://play/control_booth/": "red",
+"res://play/props/": "blue",
+"res://play/resources/": "gray",
+"res://play/sets/": "orange",
+"res://play/stages/": "yellow",
+"res://play/ui/": "green"
+}
+
+[global_group]
+
+Enemy="enemies"
+Spawner="Actor spawner"
+PowerUp="Power Ups"
+
+[gui]
+
+theme/custom="res://play/ui/themes/main_theme.tres"
+theme/custom_font="res://play/ui/fonts/Kenney Pixel.ttf"
+
+[input]
+
+Right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
+}
+Left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+]
+}
+Up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+Down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+]
+}
+Attack={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(128, 12),"global_position":Vector2(135, 47),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Enemies"
+2d_render/layer_3="Map"
+2d_render/layer_4="Weapons"
+2d_render/layer_5="Projectiles"
+2d_physics/layer_1="Player"
+2d_navigation/layer_1="Player"
+2d_physics/layer_2="Enemies"
+2d_navigation/layer_2="Enemies"
+2d_physics/layer_3="Map"
+2d_navigation/layer_3="Map"
+2d_physics/layer_4="Weapons"
+2d_physics/layer_5="Proyectiles"
+2d_physics/layer_6="Wall"
+2d_physics/layer_7="PowerUp"
+avoidance/layer_1="Player"
+avoidance/layer_2="Enemies"
+avoidance/layer_3="Map"
+avoidance/layer_4="Structures"
+
+[physics]
+
+2d/physics_engine="Rapier2D"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

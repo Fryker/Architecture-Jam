@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://6bwdtrnqrkl5"]
+
+[ext_resource type="Script" path="res://play/stages/play_world/play_world.gd" id="1_8bqmu"]
+[ext_resource type="PackedScene" uid="uid://da3pb21cawwni" path="res://test/test_level.tscn" id="2_ochjk"]
+[ext_resource type="PackedScene" uid="uid://6p2q60xi0qrs" path="res://play/actors/player/player.tscn" id="3_7f8cu"]
+
+[node name="PlayWorldTest" type="Node2D" node_paths=PackedStringArray("player", "current_stage")]
+y_sort_enabled = true
+script = ExtResource("1_8bqmu")
+player = NodePath("Player")
+current_stage = NodePath("TestLevel")
+
+[node name="TestLevel" parent="." node_paths=PackedStringArray("play_world") instance=ExtResource("2_ochjk")]
+play_world = NodePath("..")
+
+[node name="Player" parent="." instance=ExtResource("3_7f8cu")]
+position = Vector2(351, 159)

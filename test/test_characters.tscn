@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvw8ph5pkbxbs"]
+
+[ext_resource type="Script" path="res://test/test_characters.gd" id="1_klq5r"]
+[ext_resource type="PackedScene" uid="uid://cr4bprhtqi4bh" path="res://play/actors/enemies/basic_enemy/basic_enemy.tscn" id="2_2tc7q"]
+[ext_resource type="Resource" uid="uid://ctxing8jpajsm" path="res://play/actors/enemies/ghost/ghost_data.tres" id="3_3h7j4"]
+[ext_resource type="Resource" uid="uid://dstawtytxnu4h" path="res://play/actors/enemies/bat/bat_data.tres" id="3_j0jwv"]
+[ext_resource type="Resource" uid="uid://dx6ughedvqda6" path="res://play/actors/enemies/tiny_ghost/tiny_ghost.tres" id="4_631yg"]
+[ext_resource type="PackedScene" uid="uid://6p2q60xi0qrs" path="res://play/actors/player/player.tscn" id="4_rc7is"]
+
+[node name="TestCharacters" type="Node2D"]
+script = ExtResource("1_klq5r")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="BasicEnemy" parent="Enemies" instance=ExtResource("2_2tc7q")]
+position = Vector2(35, 38)
+enemy_data = ExtResource("3_j0jwv")
+
+[node name="BasicEnemy2" parent="Enemies" instance=ExtResource("2_2tc7q")]
+position = Vector2(113, 44)
+enemy_data = ExtResource("3_3h7j4")
+
+[node name="BasicEnemy3" parent="Enemies" instance=ExtResource("2_2tc7q")]
+position = Vector2(77, 58)
+enemy_data = ExtResource("4_631yg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(4, 4)
+
+[node name="Player" parent="." instance=ExtResource("4_rc7is")]
+position = Vector2(70, 14)

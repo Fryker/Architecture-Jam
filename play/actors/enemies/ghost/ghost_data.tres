@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://ctxing8jpajsm"]
+
+[ext_resource type="Script" path="res://play/resources/data/enemy_data/enemy_data.gd" id="1_02uya"]
+[ext_resource type="AnimationLibrary" uid="uid://bwkoxf5rutfpy" path="res://play/actors/enemies/ghost/ghost_animations.res" id="1_c0vye"]
+[ext_resource type="Texture2D" uid="uid://dv3c2puyxwkvr" path="res://play/actors/enemies/ghost/tile_0121.png" id="2_thfx7"]
+
+[resource]
+script = ExtResource("1_02uya")
+sprite = ExtResource("2_thfx7")
+max_health = 10
+health = 10
+attack = 5
+max_speed = 50
+min_speed = 50
+speed = 50
+exp_points = 3
+animations = ExtResource("1_c0vye")
